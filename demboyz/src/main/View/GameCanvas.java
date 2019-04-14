@@ -17,6 +17,7 @@ public class GameCanvas extends Canvas {
         do {
             do {
                 drawCanvas();
+                drawWalls();
             }
             while (getBufferStrategy().contentsRestored());
             getBufferStrategy().show();
@@ -26,8 +27,24 @@ public class GameCanvas extends Canvas {
 
     private void drawCanvas() {
         Graphics2D g2d = getDrawGraphics();
-        g2d.setColor(Color.darkGray);
+        g2d.setColor(Color.lightGray);
         g2d.fillRect(0, 0, gameMatrix.length * CELL_EDGE_SIZE, gameMatrix[0].length * CELL_EDGE_SIZE);
+        g2d.dispose();
+    }
+
+    private void drawWalls() {
+        Graphics2D g2d = getDrawGraphics();
+        g2d.setColor(Color.darkGray);
+
+        for (int y = 0; y < gameMatrix.length; y+=2) {
+            for (int x = 0; x < gameMatrix.length; x+=2) {
+//                if (gameMatrix[y][x] == 1) {
+                    int drawX = CELL_EDGE_SIZE * x;
+                    int drawY = CELL_EDGE_SIZE * y;
+                    g2d.fillRect(drawX, drawY, drawX + CELL_EDGE_SIZE, drawY + CELL_EDGE_SIZE);
+//                }
+            }
+        }
         g2d.dispose();
     }
 
