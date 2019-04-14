@@ -8,9 +8,11 @@ public class GameFrame extends JFrame {
 
     public GameFrame(GameCanvas canvas) {
         this.canvas = canvas;
-        setResizable(true);
+        setSize(canvas.getCanvasSize(), canvas.getCanvasSize());
+        setResizable(false);
         add(canvas);
         setVisible(true);
+        pack();
     }
 
     public void draw() {
