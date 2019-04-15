@@ -2,6 +2,7 @@ package View;
 
 import GameModel.Vertex;
 import GameModel.entities.Entity;
+import GameModel.entities.Pacman;
 import GameModel.entities.Wall;
 
 import java.awt.*;
@@ -18,7 +19,6 @@ public class GameCanvas extends Canvas {
     public GameCanvas(int[][] gameMatrix) {
         this.gameMatrix = gameMatrix;
     }
-
 
     public void draw() {
         do {
@@ -57,6 +57,7 @@ public class GameCanvas extends Canvas {
 
     private void drawGameEntities() {
         final Graphics2D g2d = (Graphics2D) getDrawGraphics().create();
+        gameMatrix[2][2] = 2;
         for (int y = 0; y < gameMatrix.length; y++) {
             for (int x = 0; x < gameMatrix.length; x++) {
                 /*
@@ -65,6 +66,10 @@ public class GameCanvas extends Canvas {
                 if (gameMatrix[y][x] == 1) {
                     Entity entity = new Wall(new Vertex(x, y), Color.darkGray);
                     entity.render(g2d);
+                }
+                else if (gameMatrix[y][x] == 2) {
+                    Entity player = new Pacman(new Vertex(x, y), Color.yellow);
+                    player.render(g2d);
                 }
             }
         }

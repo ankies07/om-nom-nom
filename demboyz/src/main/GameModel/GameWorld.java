@@ -2,6 +2,13 @@ package GameModel;
 
 import java.util.Random;
 
+enum Direction {
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
+}
+
 public class GameWorld {
     private int[][] maze;
     private int size;
@@ -76,7 +83,32 @@ public class GameWorld {
         return this.getRandomNumberInRange(start, end);
     }
 
+    public boolean checkMoveValid(Direction move, Vertex coords) {
+        switch (move){
+            case UP:
+                return isNotWall(new Vertex(coords.getX() - 1, coords.getY()));
+            case DOWN:
+                return isNotWall(new Vertex(coords.getX() + 1, coords.getY()));
+            case LEFT:
+                return isNotWall(new Vertex(coords.getX(), coords.getY() - 1));
+            case RIGHT:
+                return isNotWall(new Vertex(coords.getX(), coords.getY() + 1 ));
+            default:
+                throw new IllegalStateException("Unexpected value: " + move);
+        }
+    }
+
+    public boolean isNotWall(Vertex nextPosition) {
+        try {
+            return this.maze[nextPosition.getX()][nextPosition.getY()] == 0;
+        }
+        catch(ArrayIndexOutOfBoundsException ex) {
+            return false;
+        }
+    }
+
     public int[][] getMap() {
+//        convert to entity matrix?
         return this.maze;
     }
 }
