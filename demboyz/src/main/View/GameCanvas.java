@@ -1,12 +1,19 @@
 package View;
 
+import GameModel.Vertex;
+import GameModel.entities.Entity;
+import GameModel.entities.Wall;
+
 import java.awt.*;
 
 public class GameCanvas extends Canvas {
 
+    /*
+        This potentially should be a matrix of entities.
+     */
     private int[][] gameMatrix;
     // size of every cell in matrix, in pixels
-    private final static int CELL_EDGE_SIZE = 20;
+    public final static int CELL_EDGE_SIZE = 20;
 
     public GameCanvas(int[][] gameMatrix) {
         this.gameMatrix = gameMatrix;
@@ -17,7 +24,7 @@ public class GameCanvas extends Canvas {
         do {
             do {
                 drawCanvas();
-                drawWalls();
+                drawGameEntities();
             }
             while (getBufferStrategy().contentsRestored());
             getBufferStrategy().show();
@@ -42,6 +49,22 @@ public class GameCanvas extends Canvas {
                     int drawX = CELL_EDGE_SIZE * x;
                     int drawY = CELL_EDGE_SIZE * y;
                     g2d.fillRect(drawX, drawY, CELL_EDGE_SIZE, CELL_EDGE_SIZE);
+                }
+            }
+        }
+        g2d.dispose();
+    }
+
+    private void drawGameEntities() {
+        final Graphics2D g2d = (Graphics2D) getDrawGraphics().create();
+        for (int y = 0; y < gameMatrix.length; y++) {
+            for (int x = 0; x < gameMatrix.length; x++) {
+                /*
+                    Should replace this with just entity.render(g2d).
+                 */
+                if (gameMatrix[y][x] == 1) {
+                    Entity entity = new Wall(new Vertex(x, y), Color.darkGray);
+                    entity.render(g2d);
                 }
             }
         }
