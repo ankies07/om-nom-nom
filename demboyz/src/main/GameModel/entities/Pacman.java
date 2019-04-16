@@ -1,8 +1,6 @@
 package GameModel.entities;
 
-import GameModel.Direction;
 import GameModel.Vertex;
-import GameModel.GameWorld;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
@@ -26,7 +24,4 @@ public class Pacman extends Entity {
         g.fill(shape);
     }
 
-    public Direction makeMove() {
-        return null;
-    }
 }

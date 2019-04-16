@@ -9,5 +9,7 @@ public class BotPlayer extends Pacman {
         super(vertex, Color.red);
     }
 
-//    public Direction makeMove() {}
+    public Direction makeMove() {
+        return null;
+    }
 }
