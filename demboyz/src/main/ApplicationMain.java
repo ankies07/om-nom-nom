@@ -1,6 +1,6 @@
+import GameModel.GameWorld;
 import View.GameCanvas;
 import View.GameFrame;
-import GameModel.GameWorld;
 
 import javax.swing.*;
 
@@ -12,10 +12,8 @@ public class ApplicationMain {
         GameCanvas canvas = new GameCanvas(maze.getMap());
         GameFrame frame = new GameFrame(canvas);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        while(true) {
+        while (true) {
             frame.draw();
-//            Thread.sleep(100);
-
         }
     }
 }

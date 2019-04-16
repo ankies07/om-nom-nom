@@ -2,13 +2,6 @@ package GameModel;
 
 import java.util.Random;
 
-enum Direction {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT
-}
-
 public class GameWorld {
     private int[][] maze;
     private int size;
@@ -22,6 +15,8 @@ public class GameWorld {
         this.initializeMaze();
         this.buildOuterWalls();
         this.carvePaths(new Vertex(2, 2), new Vertex(this.size - 2, this.size - 2));
+        this.spawnPlayers();
+        this.spawnFood();
     }
 
     private void initializeMaze() {
@@ -98,7 +93,37 @@ public class GameWorld {
         }
     }
 
-    public boolean isNotWall(Vertex nextPosition) {
+    private void spawnPlayers() {
+        for (int i = 0; i < 4; i++) {
+            int playerType;
+            if (i == 0)  playerType = 3;
+            else playerType = 4;
+
+            this.tryPlacingEntity(playerType);
+        }
+    }
+
+    public void tryPlacingEntity(int entityType) {
+        boolean succesful_placement = false;
+
+        while (!succesful_placement) {
+            int X = this.getRandomNumberInRange(1, this.size - 1);
+            int Y = this.getRandomNumberInRange(1, this.size - 1);
+
+            if (this.maze[X][Y] == 0) {
+                succesful_placement = true;
+                this.maze[X][Y] = entityType;
+            }
+        }
+    }
+
+    private void spawnFood() {
+        for (int i = 0; i < 20; i++) {
+            this.tryPlacingEntity(2);
+        }
+    }
+
+    private boolean isNotWall(Vertex nextPosition) {
         try {
             return this.maze[nextPosition.getX()][nextPosition.getY()] == 0;
         }
@@ -108,7 +133,6 @@ public class GameWorld {
     }
 
     public int[][] getMap() {
-//        convert to entity matrix?
         return this.maze;
     }
 }

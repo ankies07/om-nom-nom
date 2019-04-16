@@ -1,14 +1,24 @@
 package GameModel.entities;
 
+import GameModel.Direction;
 import GameModel.Vertex;
+import GameModel.GameWorld;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 
-
+import static View.GameCanvas.CELL_EDGE_SIZE;
 
 public class Pacman extends Entity {
     public Pacman(Vertex vertex, Color color) {
-        super(vertex, color);
+
+        super(vertex, color, new Ellipse2D.Double(
+                        (double) vertex.getX() * CELL_EDGE_SIZE,
+                        (double) vertex.getY() * CELL_EDGE_SIZE,
+                        (double) CELL_EDGE_SIZE,
+                        (double) CELL_EDGE_SIZE
+                )
+        );
     }
 
     public void render(Graphics2D g) {
@@ -16,7 +26,7 @@ public class Pacman extends Entity {
         g.fill(shape);
     }
 
-    public void tryMove() {
-
+    public Direction makeMove() {
+        return null;
     }
 }

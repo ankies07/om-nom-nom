@@ -1,11 +1,10 @@
 package View;
 
 import GameModel.Vertex;
-import GameModel.entities.Entity;
-import GameModel.entities.Pacman;
-import GameModel.entities.Wall;
+import GameModel.entities.*;
 
 import java.awt.*;
+import java.security.InvalidParameterException;
 
 public class GameCanvas extends Canvas {
 
@@ -39,38 +38,31 @@ public class GameCanvas extends Canvas {
         g2d.dispose();
     }
 
-    private void drawWalls() {
-        Graphics2D g2d = (Graphics2D) getDrawGraphics().create();
-        g2d.setColor(Color.darkGray);
-
-        for (int y = 0; y < gameMatrix.length; y++) {
-            for (int x = 0; x < gameMatrix.length; x++) {
-                if (gameMatrix[y][x] == 1) {
-                    int drawX = CELL_EDGE_SIZE * x;
-                    int drawY = CELL_EDGE_SIZE * y;
-                    g2d.fillRect(drawX, drawY, CELL_EDGE_SIZE, CELL_EDGE_SIZE);
-                }
-            }
-        }
-        g2d.dispose();
-    }
-
     private void drawGameEntities() {
         final Graphics2D g2d = (Graphics2D) getDrawGraphics().create();
-        gameMatrix[2][2] = 2;
         for (int y = 0; y < gameMatrix.length; y++) {
             for (int x = 0; x < gameMatrix.length; x++) {
-                /*
-                    Should replace this with just entity.render(g2d).
-                 */
-                if (gameMatrix[y][x] == 1) {
-                    Entity entity = new Wall(new Vertex(x, y), Color.darkGray);
-                    entity.render(g2d);
+                System.out.print(gameMatrix[x][y]);
+                Entity entity = null;
+                switch (gameMatrix[y][x]) {
+                    case 0:
+                        continue;
+                    case 1:
+                        entity = new Wall(new Vertex(x, y), Color.darkGray);
+                        break;
+                    case 2:
+                        entity = new Food(new Vertex(x, y));
+                        break;
+                    case 3:
+                        entity = new HumanPlayer(new Vertex(x, y));
+                        break;
+                    case 4:
+                        entity = new BotPlayer(new Vertex(x, y));
+                        break;
+                    default:
+                        throw new InvalidParameterException();
                 }
-                else if (gameMatrix[y][x] == 2) {
-                    Entity player = new Pacman(new Vertex(x, y), Color.yellow);
-                    player.render(g2d);
-                }
+                entity.render(g2d);
             }
         }
         g2d.dispose();
