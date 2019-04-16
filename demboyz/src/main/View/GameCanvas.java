@@ -2,6 +2,7 @@ package View;
 
 import GameModel.Vertex;
 import GameModel.entities.Entity;
+import GameModel.entities.Pacman;
 import GameModel.entities.Wall;
 
 import java.awt.*;
@@ -64,6 +65,13 @@ public class GameCanvas extends Canvas {
                  */
                 if (gameMatrix[y][x] == 1) {
                     Entity entity = new Wall(new Vertex(x, y), Color.darkGray);
+                    entity.render(g2d);
+                }
+                /*
+                    Should replace this with just entity.render(g2d).
+                 */
+                if (gameMatrix[y][x] == 2) {
+                    Entity entity = new Pacman(new Vertex(x, y), Color.yellow);
                     entity.render(g2d);
                 }
             }
