@@ -10,7 +10,7 @@ import java.awt.*;
  */
 public abstract class Entity implements Renderable {
 
-    final Vertex vertex;
+    protected Vertex vertex;
     final Color color;
     final Shape shape;
 

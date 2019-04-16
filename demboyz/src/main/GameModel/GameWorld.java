@@ -78,21 +78,6 @@ public class GameWorld {
         return this.getRandomNumberInRange(start, end);
     }
 
-    public boolean checkMoveValid(Direction move, Vertex coords) {
-        switch (move){
-            case UP:
-                return this.isNotWall(new Vertex(coords.getX() - 1, coords.getY()));
-            case DOWN:
-                return this.isNotWall(new Vertex(coords.getX() + 1, coords.getY()));
-            case LEFT:
-                return this.isNotWall(new Vertex(coords.getX(), coords.getY() - 1));
-            case RIGHT:
-                return this.isNotWall(new Vertex(coords.getX(), coords.getY() + 1 ));
-            default:
-                throw new IllegalStateException("Unexpected value: " + move);
-        }
-    }
-
     private void spawnPlayers() {
         for (int i = 0; i < 4; i++) {
             int playerType;
@@ -123,13 +108,17 @@ public class GameWorld {
         }
     }
 
-    private boolean isNotWall(Vertex nextPosition) {
+    public boolean checkMoveValid(Vertex nextPosition) {
         try {
-            return this.maze[nextPosition.getX()][nextPosition.getY()] == 0;
+            return this.maze[nextPosition.getX()][nextPosition.getY()] != 1;
         }
         catch(ArrayIndexOutOfBoundsException ex) {
             return false;
         }
+    }
+
+    public Vertex updatePlayerPosition(Vertex playerPosition, Vertex nextPosition) {
+        return null;
     }
 
     public int[][] getMap() {

@@ -10,7 +10,7 @@ public class HumanPlayer extends Pacman {
         super(vertex, Color.yellow);
     }
 
-    public Direction makeMove (KeyEvent e) {
+    public Direction makeMove(KeyEvent e) {
         Direction move;
         int key = e.getKeyCode ();
         switch (key) {

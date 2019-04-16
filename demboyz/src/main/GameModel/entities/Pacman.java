@@ -26,6 +26,14 @@ public class Pacman extends Entity {
         g.fill(shape);
     }
 
+    public Vertex getPosition() {
+        return this.vertex;
+    }
+
+    public void updatePosition(Vertex newPosition) {
+        this.vertex = newPosition;
+    }
+
     public Direction makeMove() {
         return null;
     }
