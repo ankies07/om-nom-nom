@@ -86,13 +86,13 @@ public class GameWorld {
     public boolean checkMoveValid(Direction move, Vertex coords) {
         switch (move){
             case UP:
-                return isNotWall(new Vertex(coords.getX() - 1, coords.getY()));
+                return this.isNotWall(new Vertex(coords.getX() - 1, coords.getY()));
             case DOWN:
-                return isNotWall(new Vertex(coords.getX() + 1, coords.getY()));
+                return this.isNotWall(new Vertex(coords.getX() + 1, coords.getY()));
             case LEFT:
-                return isNotWall(new Vertex(coords.getX(), coords.getY() - 1));
+                return this.isNotWall(new Vertex(coords.getX(), coords.getY() - 1));
             case RIGHT:
-                return isNotWall(new Vertex(coords.getX(), coords.getY() + 1 ));
+                return this.isNotWall(new Vertex(coords.getX(), coords.getY() + 1 ));
             default:
                 throw new IllegalStateException("Unexpected value: " + move);
         }
